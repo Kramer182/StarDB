@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SwapiService from '../../services/swapi-service';
+import Spinner from '../spinner';
 import './person-details.css';
 
 export default class PersonDetails extends Component {
@@ -32,8 +33,8 @@ componentDidUpdate(prevPreops){
   }
   render() {
     const { person } = this.state;
-    if (!this.state.person) {
-      return <span>Select a person from a list</span>
+    if (!person) {
+      return <Spinner />
     }
 
     const {id, name, gender, birthYear, eyeColor} = person;
