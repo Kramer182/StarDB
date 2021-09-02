@@ -1,13 +1,14 @@
 import React from 'react';
-
+import SwapiService  from '../../services/swapi-service';
 import Header from '../header';
+import Row from '../row';
 import RandomPlanet from '../random-planet';
-import PeoplePage from '../people-page/people-page';
-
 import './app.css';
+import ItemDetails, {Record} from '../item-details/item-details';
 
 export default class App extends React.Component {
 
+  swapiService = new SwapiService();
   state = {
   }
 
@@ -17,12 +18,28 @@ export default class App extends React.Component {
     })
   }
   render(){
+    const {getPerson, getStarship,
+      getPersonImage,getStarshipImage} = this.swapiService;
+
+    const personDetails = (
+    <ItemDetails itemId ={11}
+    getData = {getPerson}
+    getImageUrl = {getPersonImage} >
+      <Record field = ' gender' label =' Gender'/>
+      <Record field = ' eyeColor' label =' Eye Color'/>
+    </ItemDetails>
+    );
+    const starshipDetails = (
+      <ItemDetails itemId = {5}
+      getData = {getStarship}
+      getImageUrl = {getStarshipImage} />
+    )
     return (
       <div>
         <Header />
         <RandomPlanet />
   
-        <PeoplePage />
+        <Row left = {personDetails} right = {starshipDetails} />
       </div>
     );
   }
