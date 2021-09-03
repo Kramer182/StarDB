@@ -11,10 +11,14 @@ export default class ItemList extends Component {
     }
 
     componentDidMount() {
-      const {getData} = this.props;
-        getData().then((itemList) => {
-          this.setState({itemList});
-        });
+      const { getData } = this.props;
+
+        getData()
+            .then((itemList) => {
+                this.setState({
+                    itemList
+                });
+        });  
     };
 
     renderItems(arr) {
@@ -46,3 +50,13 @@ export default class ItemList extends Component {
     );
   }
 }
+
+const f = () => {
+    return class extends Component {
+        render() {
+                return <ItemList {...this.props} />
+        }
+    };
+};
+
+export default f();
